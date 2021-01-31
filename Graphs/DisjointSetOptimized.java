@@ -71,17 +71,17 @@ public class DisjointSetOptimized {
 		Graphs graph = new Graphs(4,4);
 		
 	 	graph.edge[0].src = 0;
-        graph.edge[0].dest = 1;
+        	graph.edge[0].dest = 1;
  
-        graph.edge[1].src = 0;
-        graph.edge[1].dest = 3;
+        	graph.edge[1].src = 0;
+        	graph.edge[1].dest = 3;
  
-        graph.edge[2].src = 2;
-        graph.edge[2].dest = 3;
+        	graph.edge[2].src = 2;
+        	graph.edge[2].dest = 3;
    	 
-        graph.edge[3].src = 1;
-        graph.edge[3].dest = 2;
-        System.out.println("graph contains cycle: " + graph.isCyclic() );
+        	graph.edge[3].src = 1;
+        	graph.edge[3].dest = 2;
+        	System.out.println("graph contains cycle: " + graph.isCyclic() );
 
 	}
 
