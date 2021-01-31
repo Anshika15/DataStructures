@@ -2,10 +2,10 @@
 
 import java.util.*;
 
-class Graphs{
+class GraphsI{
     int V, E;    
     Edge edge[]; 
-    ArrayList<NodeI> list;
+    NodeI[] list;
     class Edge
     {
         int src, dest;
@@ -16,11 +16,17 @@ class Graphs{
     	int rank;
     }
     
-    Graphs(int v,int e)
+    GraphsI(int v,int e)
     {
         V = v;
         E = e;
-        list = new ArrayList<>();
+        list = new NodeI[V];
+        for(int i = 0; i < V; i++)
+        {
+        	list[i] = new NodeI();
+        	list[i].parent = -1;
+        	list[i].rank = 0;
+        }
         edge = new Edge[E];
         for (int i=0; i<e; ++i)
             edge[i] = new Edge();
@@ -42,23 +48,23 @@ class Graphs{
     
     int find(int u)
     {
-    	if(list.get(u).parent == -1)
+    	if(list[u].parent == -1)
     	{
     		return u;
     	}
-    	return list.get(u).parent = find(list.get(u).parent);
+    	return list[u].parent = find(list[u].parent);
     }
     
     void union(int u, int v)
     {
-    	if(list.get(u).rank > list.get(v).rank)
-    		list.get(v).parent = u;
-    	else if(list.get(u).rank < list.get(v).rank)
-    		list.get(u).parent = v;
+    	if(list[u].rank > list[v].rank)
+    		list[v].parent = u;
+    	else if(list[u].rank < list[v].rank)
+    		list[u].parent = v;
     	else
     	{
-    		list.get(u).parent = v;
-    		list.get(v).rank += 1;
+    		list[u].parent = v;
+    		list[v].rank += 1;
     	}
     }
 }
@@ -68,20 +74,19 @@ public class DisjointSetOptimized {
 
 	public static void main(String[] args) {
 		
-		Graphs graph = new Graphs(4,4);
+		GraphsI graph = new GraphsI(4,3);
 		
 	 	graph.edge[0].src = 0;
-        	graph.edge[0].dest = 1;
+        graph.edge[0].dest = 1;
  
-        	graph.edge[1].src = 0;
-        	graph.edge[1].dest = 3;
+        graph.edge[1].src = 0;
+        graph.edge[1].dest = 3;
  
-        	graph.edge[2].src = 2;
-        	graph.edge[2].dest = 3;
+        graph.edge[2].src = 2;
+        graph.edge[2].dest = 3;
    	 
-        	graph.edge[3].src = 1;
-        	graph.edge[3].dest = 2;
-        	System.out.println("graph contains cycle: " + graph.isCyclic() );
+      
+        System.out.println("graph contains cycle: " + graph.isCyclic() );
 
 	}
 
