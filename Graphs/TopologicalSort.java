@@ -12,6 +12,7 @@ public class TopologicalSort {
 	int E;
 	ArrayList<Integer> adj[];
 	boolean vis[];
+	boolean onpath[];
 	Stack<Integer> stack;
 	
 	TopologicalSort(int v, int e)
@@ -19,6 +20,9 @@ public class TopologicalSort {
 		V = v;
 		E = e;
 		adj = new ArrayList[V];
+		
+		onpath = new boolean[V]; // recursion stack 
+		Arrays.fill(onpath,  false);
 		
 		vis = new boolean[V];
 		Arrays.fill(vis, false);
@@ -28,8 +32,39 @@ public class TopologicalSort {
 			adj[i] = new ArrayList<>();
 	}
 	
+	boolean isCyclic()
+    {
+        for(int i = 0; i < V; i++) // to check for all the vertices.
+        {
+            if(vis[i] != true)
+                if(dfsCycle(i))
+                    return true;
+        }
+        return false;
+        
+    }
+    
+    boolean dfsCycle(int src)
+    {
+        if(vis[src]) // as we have already checked for the src node that it doesn't contains a cycle.
+            return false;
+        onpath[src] = vis[src] = true;
+        for(int i = 0 ;i < adj[src].size(); i++)
+        {
+            if(onpath[adj[src].get(i)] == true)
+                return true;
+            else
+                if(dfsCycle(adj[src].get(i)))
+                    return true;
+        }
+        onpath[src] = false;
+        return false;
+    }
+	
+	
 	void topologicalSort()
 	{
+		Arrays.fill(vis,  false);
 		for(int i = 0; i < V; i++)
 		{
 			if(vis[i] == false)
@@ -70,12 +105,18 @@ public class TopologicalSort {
 			graph.adj[src].add(dest);
 		}
 		
-		for(int i = 0; i < graph.V; i++)
-			System.out.print(graph.adj[i]);
+//		for(int i = 0; i < graph.V; i++)
+//			System.out.print(graph.adj[i]);
 		s.close();
 		
-		graph.topologicalSort();
-		graph.print();
+		if(graph.isCyclic())
+			System.out.println("graph is not a DAG");
+		else
+		{
+			graph.topologicalSort();
+			graph.print();
+		}
+		
 
 	}
 
