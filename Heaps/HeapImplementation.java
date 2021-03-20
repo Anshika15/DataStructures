@@ -7,7 +7,7 @@ public class HeapImplementation {
 		public HeapImplementation(boolean val){
 			// configuration of heap
 			minHeap = val;
-			// block the zero'th index as we are indexing starts from
+			// block the zero'th index as we are taking indexing from 1
 			list.add(-1);
 		}
 		
@@ -23,13 +23,20 @@ public class HeapImplementation {
 		
 		void push(int data)
 		{
+
+		/*
+			we add the element at the end of the array. If it violates the heap property we swap it with the parent node unitl 
+			heap property is satisfied or we reach the root node.
+		
+		*/
 			//add the element at last.
 			list.add(data);
 			
 			// restore heap property
 			int index = list.size() - 1; // last index at which we inserted the element.
 			int parent = index / 2;
-			while(index > 1 && compare(list.get(index), list.get(parent)))//list.get(index) < list.get(parent)) // second condition is for min or max heap
+			while(index > 1 && compare(list.get(index), list.get(parent)))
+			// second condition is for min or max heap
 			{
 				// swap(list.get(index), list.get(parent))
 				int temp = list.get(index);
@@ -42,6 +49,13 @@ public class HeapImplementation {
 		
 		void pop()
 		{
+
+			/*
+			Deletion in heap
+			1. we swap the root node with last node i.e first and last element of array.
+			2. Delete Last Node
+			3. Heapify the root node			
+			*/
 			// remove the top element
 			
 			// swap(list.get(1), list.get(last))
@@ -61,7 +75,7 @@ public class HeapImplementation {
 			int right = 2*index + 1;
 			
 			int minIndex = index;
-			// find the minimum element from child nodes as we have to swap with min elemeny.
+			// find the minimum element from child nodes as we have to swap with min element.
 			//left < list.size() ==> element is in list and second cond. is to check minimum  element
 			if(left < list.size() && compare(list.get(left), list.get(index))) 
 			{
