@@ -11,8 +11,25 @@ class Main {
     }
 
     public static ListNode reverse(ListNode head) {
+      if(head == null || head.next == null)
+        return head;
       
-        return null;
+      ListNode curr = head;
+      ListNode prev = null;
+      ListNode forw = null;
+      
+      while(curr != null)
+      {
+          forw = curr.next;
+          curr.next = prev;
+          
+          prev = curr;
+          curr = forw;
+       
+      }
+      
+         
+        return prev;
     }
 
     public static void main(String[] args) {
