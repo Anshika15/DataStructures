@@ -71,7 +71,8 @@ public class Main {
             return level;
           }
 
-          q.add(new Pair(rowdash, coldash));
+          q.addLast(new Pair(rowdash, coldash));
+          vis[rowdash][coldash] = true;
         }
       }
       level++;
