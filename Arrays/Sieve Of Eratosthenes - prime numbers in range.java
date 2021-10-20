@@ -31,11 +31,12 @@ public class Main {
        res[0] = false;
        res[1] = false;
        
-       for(int i = 2; i*i <= n; i++)
+       /* Overall Time complexity -> O(n log(log(n)) */
+       for(int i = 2; i*i <= n; i++) /* O(log(log(n))) */
        {
            if(res[i] == true){
             /* make factors of i false */
-            for(int j = i+i; j <= n; j+= i)
+            for(int j = i+i; j <= n; j+= i)  /* O(n) */
             {
                 res[j] = false; // not prime
             }
