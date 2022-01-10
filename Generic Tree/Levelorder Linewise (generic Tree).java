@@ -95,7 +95,8 @@ public class Main {
     System.out.println("Node Post " + node.data);
   }
 
-  public static void levelOrderLinewise(Node node){
+/* using two queue */
+ /* public static void levelOrderLinewise(Node node){
       if(node == null)
         return;
         
@@ -119,7 +120,95 @@ public class Main {
         }
         
     }
+  } */
+  
+  /* using one queue */
+  /*
+  public static void levelOrderLinewise(Node node){
+      if(node == null)
+        return;
+        
+    LinkedList<Node> mainQ = new LinkedList<>();
+    
+    mainQ.add(node);
+    mainQ.add(null); // acts like a flag for a particular level
+    while(mainQ.size() > 0)
+    {
+        Node n = mainQ.removeFirst();
+        if(n != null){
+            System.out.print(n.data + " ");
+            
+            for(Node child : n.children)
+                mainQ.add(child);
+        }
+        else // if null is encountered check if any other elemnt is present in q or not i.e next level is there or not
+        {
+            if(mainQ.size() > 0)
+            {
+                mainQ.add(null);
+                System.out.println();
+            }
+        }
+        
+    }
   }
+  */
+  
+  /* using count/size approach */
+  
+ /*  public static void levelOrderLinewise(Node node){
+      if(node == null)
+        return;
+        
+    LinkedList<Node> mainQ = new LinkedList<>();
+    
+    mainQ.add(node);
+    while(mainQ.size() > 0)
+    {
+        int size = mainQ.size();
+        while(size-- > 0){
+            Node n = mainQ.removeFirst();
+            if(n != null){
+                System.out.print(n.data + " ");
+                
+                for(Node child : n.children)
+                    mainQ.add(child);
+            }
+        
+        }
+        System.out.println();
+        
+    }
+  }
+  
+  */
+  
+  /* using pair - node and level*/
+  
+   public static void levelOrderLinewise(Node node){
+      if(node == null)
+        return;
+        
+    LinkedList<Pair> mainQ = new LinkedList<>();
+    
+    mainQ.add(new Pair(node, 1));
+    int level = 1;
+    while(mainQ.size() > 0)
+    {
+        Pair pq = mainQ.removeFirst();
+        if(pq.level > level)
+        {
+            level = pq.level;
+            System.out.println();
+        }
+        
+        System.out.print(pq.node.data + " ");
+        for(Node child : pq.node.children)
+            mainQ.add(new Pair(child, pq.level+1));
+        
+    }
+  }
+  
 
   public static void main(String[] args) throws Exception {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -134,4 +223,15 @@ public class Main {
     levelOrderLinewise(root);
   }
 
+static class Pair
+{
+    Node node;
+    int level;
+    
+    Pair(Node node, int level)
+    {
+        this.node = node;
+        this.level = level;
+    }
+}
 }
