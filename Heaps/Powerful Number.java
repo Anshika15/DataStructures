@@ -18,9 +18,9 @@ public class Main {
         
         HashSet<Integer> set = new HashSet<>();
         
-        for(int i = 1; i < bound; i *= x)
+        for(int i = 1; i < bound; i *= x) /* i < logx(bound) */
         {
-            for(int j = 1; i+j <= bound; j *= y)
+            for(int j = 1; i+j <= bound; j *= y) /* i < logy(bound) */
             {
                 set.add(i+j);
                 if(y == 1)
@@ -29,6 +29,8 @@ public class Main {
             if(x == 1)
                 break;
         }
+        /* time complexity = O(logx(bound).logy(bound)) */
+	/* space complexity is also same */
 		return new ArrayList<>(set);
 	}
 	
