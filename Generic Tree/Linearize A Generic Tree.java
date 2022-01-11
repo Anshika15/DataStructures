@@ -149,7 +149,7 @@ public class Main {
       removeLeaves(child);
     }
   }
-
+/* o(n^2) approach */
   public static void linearize(Node node){
     for(Node child : node.children)
         linearize(child);
@@ -172,6 +172,25 @@ public class Main {
       return node;
   }
   
+  /* O(n) approach */
+  public static Node linearize2(Node node)
+  {
+      if(node.children.size() == 0)
+        return node;
+        
+      Node lastNodeTail = linearize2(node.children.get(node.children.size() - 1));
+      
+      while(node.children.size() > 1)
+      {
+          Node lc = node.children.remove(node.children.size() - 1);
+        Node sl = node.children.get(node.children.size() - 1);
+        Node stl = linearize2(sl);
+        stl.children.add(lc); 
+      }
+      
+      return lastNodeTail;
+  }
+  
   public static void main(String[] args) throws Exception {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     int n = Integer.parseInt(br.readLine());
@@ -182,7 +201,7 @@ public class Main {
     }
 
     Node root = construct(arr);
-    linearize(root);
+    linearize2(root);
     display(root);
   }
 
