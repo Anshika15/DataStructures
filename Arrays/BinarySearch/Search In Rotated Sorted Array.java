@@ -22,7 +22,7 @@ public class Main {
         while(i <= j)
         {
             int mid = i + (j-i)/2;
-
+            System.out.println(arr[mid]);
             if(arr[mid] == target)
                 return mid;
             if(arr[i] <= arr[mid])
@@ -40,7 +40,7 @@ public class Main {
             }
             else if(arr[mid] <= arr[j]) // check whether mid to high part is sorted or not
             {
-                if(target >= arr[mid] && target < arr[j])
+                if(target >= arr[mid] && target <= arr[j])
                 {
                     // then our value lies in this range only so search here
                     i = mid+1;
@@ -54,6 +54,7 @@ public class Main {
         }
 
         return -1;
+
     }
 
     public static void main(String[]args) {
