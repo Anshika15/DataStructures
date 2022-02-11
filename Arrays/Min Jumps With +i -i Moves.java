@@ -1,3 +1,14 @@
+/* 
+
+Min Jumps With +i -i Moves
+
+1. Given an integers X. 
+2. The task is to find the minimum number of jumps to reach a point X in the number line starting from zero.
+3. The first jump made can be of length one unit and each successive jump will be exactly one unit longer than the previous jump in length. 
+4. It is allowed to go either left or right in each jump.
+
+*/
+
 import java.util.*;
 
 public class Main {
