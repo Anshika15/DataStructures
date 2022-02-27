@@ -1,3 +1,11 @@
+/*
+
+Wiggle Sort 1
+1. Given an integer array 'arr'.
+2. Reorder it such that nums[0] <= nums[1] >= nums[2] <= nums[3]....
+
+*/
+
 import java.util.*;
 
 public class Main {
