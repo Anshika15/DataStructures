@@ -1,5 +1,12 @@
 import java.util.*;
+/* 
+Find All Duplicates In An Array
 
+1. Given an integer array nums of length n where all the integers of nums are in the range [1, n].
+2. Each integer appears once or twice, return an array of all the integers that appears twice.
+3. You must write an algorithm that runs in O(n) time and uses only constant extra space.
+
+*/
 public class Main {
 
   public static List<Integer> findDuplicates(int[] nums) {
