@@ -35,7 +35,8 @@ public class Main {
         {
             sb.append(arr[j]);
         }
-        
+
+        // reverse end string 
         for(int j = arr.length-1; j > i; j--)
         {
             sb.append(arr[j]);
